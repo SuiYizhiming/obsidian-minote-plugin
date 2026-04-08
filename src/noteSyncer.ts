@@ -83,6 +83,10 @@ export default class NoteSyncer {
 					title = title.replace(/<[^>]+>/g, '');
 					// 去除标题中的非法字符 \/:*?"<>| 和换行符
 					title = title.replace(/[\\\/:*?"<>|\n]/g, '');
+					// 限制标题长度 ，防止文件名过长引起解压缩失败等问题
+					if (title.length > 30) {
+						title = title.substring(0, 27) + '...';
+					}
 
 					const note: Note = {
 						id: entry.id,
